@@ -36,6 +36,7 @@ public class lnp
 			String temp2 = CommandFJ.fj(cmd, 2);
 			int pd = Integer.parseInt(temp1);
 			data.set(temp2, pd);
+			DataManager.SaveConfig("./configs/channel.config", CLconfig);
 			User.sendto("已经将终端<"+temp2+">切换到频道:"+pd);
 			return;
 		}
@@ -44,6 +45,7 @@ public class lnp
 			String temp1 = CommandFJ.fj(cmd, 1);
 			int pd = Integer.parseInt(temp1);
 			data.set(User.ID, pd);
+			DataManager.SaveConfig("./configs/channel.config", CLconfig);
 			User.sendto("已经切换到频道:"+pd);
 			return;
 		}
