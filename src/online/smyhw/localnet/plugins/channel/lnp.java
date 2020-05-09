@@ -37,7 +37,7 @@ public class lnp
 			int pd = Integer.parseInt(temp1);
 			data.set(temp2, pd);
 			DataManager.SaveConfig("./configs/channel.config", CLconfig);
-			User.sendto("已经将终端<"+temp2+">切换到频道:"+pd);
+			User.sendMsg("已经将终端<"+temp2+">切换到频道:"+pd);
 			return;
 		}
 		else
@@ -46,7 +46,7 @@ public class lnp
 			int pd = Integer.parseInt(temp1);
 			data.set(User.ID, pd);
 			DataManager.SaveConfig("./configs/channel.config", CLconfig);
-			User.sendto("已经切换到频道:"+pd);
+			User.sendMsg("已经切换到频道:"+pd);
 			return;
 		}
 	}
