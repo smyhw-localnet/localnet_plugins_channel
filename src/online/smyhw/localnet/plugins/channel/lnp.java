@@ -1,5 +1,6 @@
 package online.smyhw.localnet.plugins.channel;
 
+import online.smyhw.localnet.LNlib;
 import online.smyhw.localnet.message;
 import online.smyhw.localnet.command.cmdManager;
 import online.smyhw.localnet.data.DataManager;
@@ -56,6 +57,11 @@ public class lnp
 		if(data.get(dd.From_User.ID)!=data.get(dd.To_User.ID))
 		{
 			dd.Cancel=true;
+		}
+		//特殊频道，全局广播
+		if(data.get(dd.From_User.ID)==1)
+		{
+			LNlib.SendAll(dd.msg,dd.From_User);
 		}
 	}
 }
