@@ -45,7 +45,7 @@ public class lnp
 		{
 			String temp1 = CommandFJ.fj(cmd, 1);
 			int pd = Integer.parseInt(temp1);
-			data.set(User.ID, pd);
+			data.set(User.remoteID, pd);
 			DataManager.SaveConfig("./configs/channel.config", CLconfig);
 			User.sendMsg("已经切换到频道:"+pd);
 			return;
@@ -54,12 +54,12 @@ public class lnp
 	
 	public static void lr(ChatINFO_Event dd)
 	{
-		if(data.get(dd.From_User.ID)!=data.get(dd.To_User.ID))
+		if(data.get(dd.From_User.remoteID)!=data.get(dd.To_User.remoteID))
 		{
 			dd.Cancel=true;
 		}
 		//特殊频道，全局广播
-		if(data.get(dd.From_User.ID)==1)
+		if(data.get(dd.From_User.remoteID)==1)
 		{
 			LNlib.SendAll(dd.msg,dd.From_User);
 		}
