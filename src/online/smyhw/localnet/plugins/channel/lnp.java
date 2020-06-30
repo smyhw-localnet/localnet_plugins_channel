@@ -19,6 +19,7 @@ public class lnp
 		try 
 		{
 			cmdManager.add_cmd("cl", lnp.class.getMethod("cmd", new Class[]{Client_sl.class,String.class}));
+			cmdManager.add_cmd("cb", lnp.class.getMethod("cmd_bc", new Class[]{Client_sl.class,String.class}));
 			EventManager.AddListener("ChatINFO", lnp.class.getMethod("lr", new Class[] {ChatINFO_Event.class}));
 		} 
 		catch (Exception e) 
@@ -30,7 +31,7 @@ public class lnp
 	
 	public static void cmd(Client_sl User,String cmd)
 	{
-		message.info("得到指令:"+cmd+";num="+CommandFJ.js(cmd));
+//		message.info("得到指令:"+cmd+";num="+CommandFJ.js(cmd));
 		if(CommandFJ.js(cmd)>2)
 		{
 			String temp1 = CommandFJ.fj(cmd, 1);
@@ -52,16 +53,24 @@ public class lnp
 		}
 	}
 	
+	public static void cmd_bc(Client_sl User,String cmd)
+	{
+		if(CommandFJ.js(cmd)!=2)
+		{
+			User.sendNote("参数不匹配", "使用方法 > bc <消息>");
+			return;
+		}
+		LNlib.SendAll(CommandFJ.fj(cmd, 1), User);
+		return;
+	}
+	
 	public static void lr(ChatINFO_Event dd)
 	{
+		//特殊频道，全局广播
+		if(data.get(dd.From_User.remoteID)==1) {return;}
 		if(data.get(dd.From_User.remoteID)!=data.get(dd.To_User.remoteID))
 		{
 			dd.Cancel=true;
-		}
-		//特殊频道，全局广播
-		if(data.get(dd.From_User.remoteID)==1)
-		{
-			LNlib.SendAll(dd.msg,dd.From_User);
 		}
 	}
 }
