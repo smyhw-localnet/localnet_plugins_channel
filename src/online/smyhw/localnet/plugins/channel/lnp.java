@@ -37,18 +37,20 @@ public class lnp
 			String temp1 = CommandFJ.fj(cmd, 1);
 			String temp2 = CommandFJ.fj(cmd, 2);
 			int pd = Integer.parseInt(temp1);
-			data.set(temp2, pd);
-			DataManager.SaveConfig("./configs/channel.config", CLconfig);
-			User.sendMsg("已经将终端<"+temp2+">切换到频道:"+pd);
+			if(data.set(temp2, pd))
+				User.sendMsg("已经将终端<"+temp2+">切换到频道:"+pd);
+			else
+				User.sendNote("文件IO", "配置保存失败");
 			return;
 		}
 		else
 		{
 			String temp1 = CommandFJ.fj(cmd, 1);
 			int pd = Integer.parseInt(temp1);
-			data.set(User.remoteID, pd);
-			DataManager.SaveConfig("./configs/channel.config", CLconfig);
-			User.sendMsg("已经切换到频道:"+pd);
+			if(data.set(User.remoteID, pd))
+				User.sendMsg("已经切换到频道:"+pd);
+			else
+				User.sendNote("文件IO", "配置保存失败");
 			return;
 		}
 	}

@@ -16,9 +16,9 @@ public class data
 		return temp1;
 	}
 	
-	public static void set(String User,int channel)
+	public static boolean set(String User,int channel)
 	{
 		lnp.CLconfig.set("data."+User, channel);
-		DataManager.SaveConfig("./configs/channel.config", lnp.CLconfig);
+		return DataManager.SaveConfig("./configs/channel.config", lnp.CLconfig);
 	}
 }
