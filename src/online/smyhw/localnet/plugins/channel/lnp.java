@@ -32,11 +32,23 @@ public class lnp
 	public static void cmd(Client_sl User,String cmd)
 	{
 //		message.info("得到指令:"+cmd+";num="+CommandFJ.js(cmd));
+		if(CommandFJ.js(cmd)==0) 
+		{
+			User.sendMsg("使用方法: cl <频道> [终端ID]");
+		}
 		if(CommandFJ.js(cmd)>2)
 		{
 			String temp1 = CommandFJ.fj(cmd, 1);
 			String temp2 = CommandFJ.fj(cmd, 2);
-			int pd = Integer.parseInt(temp1);
+			int pd;
+			try 
+			{
+				pd = Integer.parseInt(temp1);
+			}
+			catch(NumberFormatException e) {
+				User.sendMsg("给定的参数<"+temp1+">无法被识别为数字");
+				return;
+			}
 			if(data.set(temp2, pd))
 				User.sendMsg("已经将终端<"+temp2+">切换到频道:"+pd);
 			else
@@ -46,9 +58,19 @@ public class lnp
 		else
 		{
 			String temp1 = CommandFJ.fj(cmd, 1);
-			int pd = Integer.parseInt(temp1);
+			int pd;
+			try 
+			{
+				pd = Integer.parseInt(temp1);
+			}
+			catch(NumberFormatException e) {
+				User.sendMsg("给定的参数<"+temp1+">无法被识别为数字");
+				return;
+			}
 			if(data.set(User.remoteID, pd))
+			{
 				User.sendMsg("已经切换到频道:"+pd);
+			}
 			else
 				User.sendNote("文件IO", "配置保存失败");
 			return;
@@ -59,7 +81,7 @@ public class lnp
 	{
 		if(CommandFJ.js(cmd)!=2)
 		{
-			User.sendNote("参数不匹配", "使用方法 > bc <消息>");
+			User.sendNote("参数不匹配", "使用方法: bc <消息>");
 			return;
 		}
 		LNlib.SendAll(CommandFJ.fj(cmd, 1), User);
