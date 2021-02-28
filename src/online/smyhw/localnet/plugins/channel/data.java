@@ -9,7 +9,7 @@ public class data
 		int temp1 = lnp.CLconfig.get_int("data."+User);
 		if(temp1==0) 
 		{
-			int pd=lnp.CLconfig.get_int("config.default");
+			int pd=lnp.CLconfig.get_int("config.default",555);
 			set(User,pd);
 			return pd;
 		}
